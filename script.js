@@ -13,14 +13,14 @@ const blogDisplay = document.getElementById("blogPostDisplay");
 
 //Functions---------------------------------------------------------------
 //Displays posts to browser
-const renderPosts = () =>{
+const renderPosts = () => {
     console.log("rendering function...");
 
 }
 
 //Handles submission
 //Gets input values from submit event and checks validity
-const handleSubmit = (e) =>{
+const handleSubmit = (e) => {
     e.preventDefault();
 
     const titleInput = postTitle.value.trim();
@@ -28,35 +28,45 @@ const handleSubmit = (e) =>{
     let isValid = true;
 
     //title validation
-    if(!titleInput || titleInput.length < 5){
+    if (!titleInput || titleInput.length < 5) {
         titleError.textContent = "Your title is too short!";
         isValid = false;
-        
-    }else {
+
+    } else {
         titleError.textContent = "";
 
     }
 
     //content validation
-    if(!contentInput || contentInput.length < 10){
+    if (!contentInput || contentInput.length < 10) {
         contentError.textContent = "Make your post more lively with more words!";
         isValid = false;
 
-    }else{
+    } else {
         contentError.textContent = "";
 
     }
 
     //checks and stops if invalid
-    if(!isValid){
-        console.log("validation failed")
+    if (!isValid) {
+        console.log("validation failed");
         return;
     }
 
+    const newPostObj = {
+        id: Date.now(),
+        title: titleInput,
+        content: contentInput,
+        createdAt: new Date().toISOString()
+    };
 
-    console.log("submitting...")
-    console.log(`Title: ${titleInput}`)
-    console.log(`Content: ${contentInput}`)
+    posts.push(newPostObj);
+
+
+    // console.log("submitting...")
+    // console.log(`Title: ${titleInput}`)
+    // console.log(`Content: ${contentInput}`)
+    // console.log(newPostObj)
 }
 
 
