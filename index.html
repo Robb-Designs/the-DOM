@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,32 @@
     <link rel="stylesheet" href="./styles.css">
     <script defer src="./script.js"></script>
 </head>
+
 <body>
-    <section>
-        <div class="sectionContainer">
-            <form action="">
-                <h2>Upload a post</h2>
-                
-                <label for="title-input">Title</label>
-                <input id="title" name="title-input" type="text" placeholder="Post title" required>
+    <main>
+        <section>
+            <div class="sectionContainer">
+                <form id="postForm">
+                    <h2>Upload a post</h2>
 
-                <label for="description"></label>
-                <textarea name="description" id="descriptionBox" placeholder="Enter your comments..."></textarea>
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" placeholder="Post title">
+                    <span class="errorMessage" id="titleError"></span>
 
-                <button type="submit" role="button">Post</button>
-            </form>
-            
-        </div>
-    </section>
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" placeholder="Enter your comments..."></textarea>
+                    <span class="errorMessage" id="contentError"></span>
+
+                    <button type="submit" role="button">Post</button>
+                </form>
+
+            </div>
+        </section>
+
+        <section id="blogPostDisplay"></section>
+    </main>
+
+
 </body>
+
 </html>
