@@ -1,30 +1,65 @@
-//Global variables---------------------------------------------
+//Global variables--------------------------------------------------------
 let posts = [];
 
 
-// DOM variables-----------------------------------------------
+// DOM variables----------------------------------------------------------
 const form = document.getElementById("postForm");
 const postTitle = document.getElementById("title");
 const postContent = document.getElementById("content");
 const titleError = document.getElementById("titleError");
-const descriptionError = document.getElementById("contentError");
+const contentError = document.getElementById("contentError");
 const blogDisplay = document.getElementById("blogPostDisplay");
 
 
-//Functions---------------------------------------------------
-//Displays posts
-const renderPost = (e) =>{
+//Functions---------------------------------------------------------------
+//Displays posts to browser
+const renderPosts = () =>{
     console.log("rendering function...");
 
 }
 
 //Handles submission
-const handleSubmit = () =>{
-    
+//Gets input values from submit event and checks validity
+const handleSubmit = (e) =>{
+    e.preventDefault();
+
+    const titleInput = postTitle.value.trim();
+    const contentInput = postContent.value.trim();
+    let isValid = true;
+
+    //title validation
+    if(!titleInput || titleInput.length < 5){
+        titleError.textContent = "Your title is too short!";
+        isValid = false;
+        
+    }else {
+        titleError.textContent = "";
+
+    }
+
+    //content validation
+    if(!contentInput || contentInput.length < 10){
+        contentError.textContent = "Make your post more lively with more words!";
+        isValid = false;
+
+    }else{
+        contentError.textContent = "";
+
+    }
+
+    //checks and stops if invalid
+    if(!isValid){
+        console.log("validation failed")
+        return;
+    }
+
+
     console.log("submitting...")
+    console.log(`Title: ${titleInput}`)
+    console.log(`Content: ${contentInput}`)
 }
 
 
 
-//Event Listening & Calls
-form.addEventListener("submit", renderPost)
+//Event Listening & Calls--------------------------------------------------
+form.addEventListener("submit", handleSubmit)

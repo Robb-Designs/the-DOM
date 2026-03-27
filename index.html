@@ -19,11 +19,11 @@
                     <h2>Upload a post</h2>
 
                     <label for="title">Title</label>
-                    <input id="title" name="title" type="text" placeholder="Post title">
+                    <input id="title" name="title" type="text" placeholder="Post title" minlength="5" maxlength="50">
                     <span class="errorMessage" id="titleError"></span>
 
                     <label for="content">Content</label>
-                    <textarea name="content" id="content" placeholder="Enter your comments..."></textarea>
+                    <textarea name="content" id="content" placeholder="Enter your comments..." maxlength="500"></textarea>
                     <span class="errorMessage" id="contentError"></span>
 
                     <button type="submit" role="button" id="submitBtn">Post</button>
