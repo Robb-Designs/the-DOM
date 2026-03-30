@@ -11,28 +11,34 @@
     <script defer src="./script.js"></script>
 </head>
 
-<body>
+<body class="min-h-screen bg-base-300 p-6">
     <main>
         <section>
             <div class="sectionContainer">
-                <form id="postForm">
-                    <h2>Upload a post</h2>
 
-                    <label for="title">Title</label>
-                    <input id="title" name="title" type="text" placeholder="Post title" minlength="5" maxlength="50">
-                    <span class="errorMessage" id="titleError"></span>
+                <form id="postForm" class="card bg-base-200 shadow-lg p-6 space-y-4">
+                    <h2 class="text-2xl font-bold text-center">Upload a post</h2>
+                    <div>
+                        <label for="title" class="label">Title</label>
+                        <input id="title" name="title" type="text" placeholder="Post title" minlength="5"
+                            maxlength="50" class="input input-bordered w-full">
+                        <span class="errorMessage text-error text-sm " id="titleError"></span>
+                    </div>
 
-                    <label for="content">Content</label>
-                    <textarea name="content" id="content" placeholder="Enter your comments..." maxlength="500"></textarea>
-                    <span class="errorMessage" id="contentError"></span>
+                    <div>
+                        <label for="content" class="label">Content</label>
+                        <textarea name="content" id="content" placeholder="Enter your comments..." maxlength="500"
+                            class="textarea textarea-bordered w-full"></textarea>
+                        <span class="errorMessage" id="contentError"></span>
+                    </div>
 
-                    <button type="submit" role="button" id="submitBtn">Post</button>
+                    <button type="submit" role="button" id="submitBtn" class="btn btn-primary">Post</button>
                 </form>
 
             </div>
         </section>
 
-        <section id="blogPostDisplay"></section>
+        <section id="blogPostDisplay" class="space-y-4"></section>
     </main>
 
 

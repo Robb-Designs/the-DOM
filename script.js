@@ -81,6 +81,7 @@ const handleSubmit = (e) => {
 
     //title validation
     if (!titleInput || titleInput.length < 5) {
+        titleError.style.webkitTextFillColor = "red"
         titleError.textContent = "Your title is too short!";
         isValid = false;
 
@@ -91,7 +92,8 @@ const handleSubmit = (e) => {
 
     //content validation
     if (!contentInput || contentInput.length < 10) {
-        contentError.textContent = "Make your post more lively with more words!";
+        contentError.style.webkitTextFillColor = "red"
+        contentError.innerHTML = "Make your post more lively with more words!";
         isValid = false;
 
     } else {
