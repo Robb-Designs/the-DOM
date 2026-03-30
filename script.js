@@ -1,5 +1,6 @@
 //Global variables--------------------------------------------------------
-let posts = [];
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
 
 
 // DOM variables----------------------------------------------------------
@@ -20,7 +21,10 @@ const renderPosts = () => {
         const postHTML = `
         <div class="card bg-base-200 p-4 shadow" data-id="${post.id}">
             <h3 class="text-lg font-bold">${post.title}</h3>
-            <p>${post.content}</p>
+            <div class="flex gap-4">
+                <p>${post.content}</p>
+                <button class="removeBtn" >Remove</button>
+            </div>
         </div>
         `;
 
@@ -28,6 +32,24 @@ const renderPosts = () => {
     });
 
     console.log("rendering function...");
+
+}
+
+
+const removePost = (e) => {
+    if (e.target.classList.contains("removeBtn")) {
+
+        const postElement = e.target.closest(".card");
+        const postId = Number(postElement.dataset.id);
+        // new array with all posts whose id doesnt  match the one we clicked
+        posts = posts.filter(post => post.id !== postId);
+
+        localStorage.setItem("posts", JSON.stringify(posts));
+
+        renderPosts();
+
+        console.log(postId);
+    }
 
 }
 
@@ -75,19 +97,17 @@ const handleSubmit = (e) => {
 
     posts.push(newPostObj);
 
-    //saving to local storage localStorage.setItem("posts", JSON.stringify(posts));
-    renderPosts();
     form.reset();
 
+    localStorage.setItem("posts", JSON.stringify(posts));
 
-    // console.log("submitting...")
-    // console.log(`Title: ${titleInput}`)
-    // console.log(`Content: ${contentInput}`)
-    // console.log(newPostObj)
+     renderPosts();
+
 }
 
 
 
 //Event Listening & Calls--------------------------------------------------
 form.addEventListener("submit", handleSubmit)
-form.addEventListener("submit", renderPosts)
+
+blogDisplay.addEventListener("click", removePost)
