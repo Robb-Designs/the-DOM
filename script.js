@@ -1,5 +1,6 @@
 //Global variables--------------------------------------------------------
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
+let currentEditId = null;
 
 
 
@@ -23,6 +24,7 @@ const renderPosts = () => {
             <h3 class="text-lg font-bold">${post.title}</h3>
             <div class="flex gap-4">
                 <p>${post.content}</p>
+                <button class="editBtn" >Edit</button>
                 <button class="removeBtn" >Remove</button>
             </div>
         </div>
@@ -51,6 +53,21 @@ const removePost = (e) => {
         console.log(postId);
     }
 
+}
+
+const editPost = (e) => {
+    if (e.target.classList.contains("editBtn")) {
+        const postElement = e.target.closest(".card");
+        const editId = Number(postElement.dataset.id);
+
+        post = posts.find(post => post.id === editId);
+
+        postTitle.value = post.title;
+
+        postContent.value = post.content;
+
+        currentEditId = editId;
+    }
 }
 
 //Handles submission
@@ -95,13 +112,35 @@ const handleSubmit = (e) => {
         createdAt: new Date().toISOString()
     };
 
-    posts.push(newPostObj);
+    if (currentEditId) {
+        posts = posts.map(post => {
+            if (post.id === currentEditId) {
+                return {
+                    ...post,
+                    title: titleInput,
+                    content: contentInput
+                };
+            } else {
+                return post;
+            }
+        });
 
-    form.reset();
+        currentEditId = null;
+
+    } else {
+        const newPostObj = {
+            id: Date.now(),
+            title: titleInput,
+            content: contentInput,
+            createdAt: new Date().toISOString()
+        };
+
+        posts.push(newPostObj);
+    }
 
     localStorage.setItem("posts", JSON.stringify(posts));
-
-     renderPosts();
+    renderPosts();
+    form.reset();
 
 }
 
@@ -110,4 +149,7 @@ const handleSubmit = (e) => {
 //Event Listening & Calls--------------------------------------------------
 form.addEventListener("submit", handleSubmit)
 
-blogDisplay.addEventListener("click", removePost)
+blogDisplay.addEventListener("click", (e) => {
+    removePost(e);
+    editPost(e);
+});
